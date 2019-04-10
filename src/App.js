@@ -1,28 +1,29 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { setGlobal, useGlobal } from 'reactn';
+import { render } from "react-dom";
 import './App.css';
+import GatorTrap from './GatorTrap';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+// Initialize our state:
+setGlobal({
+  baits: ["fish", "turtle", "coypu", "muskrat", "deer"],
+  caught: 0
+});
+
+const GatorCatchinApp = () => {
+  const [caught] = useGlobal('caught');
+  return (
+    <div>
+      <h1>Gator Catchin' App</h1>
+      <GatorTrap />
+      <GatorTrap />
+      <GatorTrap />
+      <GatorTrap />
+      <GatorTrap />
+      <h2>Caught: {caught}</h2>
+    </div>
+  )
 }
 
-export default App;
+const container = document.createElement("div");
+document.body.appendChild(container);
+render(<GatorCatchinApp />, container);

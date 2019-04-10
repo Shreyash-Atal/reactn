@@ -1,12 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React, { setGlobal, useGlobal } from 'reactn';
+import { render } from "react-dom";
+import './App.css';
+import GatorTrap from './GatorTrap';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// Initialize our state:
+setGlobal({
+    baits: ["fish", "turtle", "coypu", "muskrat", "deer"],
+    caught: 0
+});
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const GatorCatchinApp = () => {
+    const [caught] = useGlobal('caught');
+    return (
+        <div>
+            <h1>Gator Catchin' App</h1>
+            <GatorTrap />
+            <GatorTrap />
+            <GatorTrap />
+            <GatorTrap />
+            <GatorTrap />
+            <h2>Caught: {caught}</h2>
+        </div>
+    )
+}
+
+const container = document.createElement("div");
+document.body.appendChild(container);
+render(<GatorCatchinApp />, container);
